@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import cniao5.com.cniao5shop.Contants;
 import cniao5.com.cniao5shop.R;
+import cniao5.com.cniao5shop.adapter.BaseAdapter;
 import cniao5.com.cniao5shop.adapter.DividerItemDecoration;
 import cniao5.com.cniao5shop.adapter.HWAdatper;
 import cniao5.com.cniao5shop.bean.Page;
@@ -157,7 +159,12 @@ public class HotFragment extends Fragment {
 
             case  STATE_NORMAL:
                 mAdatper = new HWAdatper(getContext(),datas);
-
+                mAdatper.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Toast.makeText(getContext(),"点击条目 : "+datas.get(position).getName(),Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 mRecyclerView.setAdapter(mAdatper);
 
